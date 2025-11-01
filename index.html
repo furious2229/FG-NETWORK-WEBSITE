@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FG NETWORK — Private Minecraft Server</title>
+<meta name="description" content="FG NETWORK — Private Minecraft server. 200+ Custom Enchants. Apply for whitelist.">
+<style>
+/* Fonts */
+@font-face{font-family:MC; src:url('https://fonts.cdnfonts.com/s/15085/Minecraftia-Regular.ttf');}
+:root{
+  --emerald:#00d07a; --emerald-dark:#0b6a3f; --wood:#8b5a2b; --gold:#ffd46b;
+  --bg-top:#9be9ff; --bg-mid:#7ed654; --text:#072214;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:MC,Arial,Helvetica,sans-serif;color:var(--text);background:linear-gradient(180deg,var(--bg-top),#c9f0ff 35%,var(--bg-mid) 100%);}
+a{color:inherit;text-decoration:none}
+
+/* Top sky particles (subtle) */
+.sky {
+  position:fixed;left:0;right:0;top:0;height:220px;z-index:0;pointer-events:none;opacity:0.95;
+  background-image:
+    radial-gradient(circle at 12% 30%, rgba(255,255,255,0.95) 0 3%, transparent 4%),
+    radial-gradient(circle at 38% 20%, rgba(255,255,255,0.95) 0 3%, transparent 4%),
+    radial-gradient(circle at 72% 40%, rgba(255,255,255,0.95) 0 3%, transparent 4%);
+  background-size:300px 120px,260px 90px,360px 140px;
+  animation: skyMove 42s linear infinite;filter:blur(6px);
+}
+@keyframes skyMove{to{background-position:-1200px 0,-900px 0,-1400px 0}}
+
+/* Container */
+.wrapper{position:relative;z-index:2;padding:26px;max-width:1150px;margin:0 auto}
+
+/* Header / hero */
+.header{
+  display:flex;gap:18px;align-items:center;justify-content:flex-start;padding:10px 12px;border-radius:16px;
+  background:linear-gradient(180deg,rgba(255,255,255,0.85),rgba(255,255,255,0.78));
+  box-shadow:0 18px 50px rgba(0,0,0,0.12);
+}
+.logo-wrap{width:180px;height:180px;border-radius:18px;background:linear-gradient(180deg,#fff,rgba(255,255,255,0.85));display:flex;align-items:center;justify-content:center;box-shadow:0 14px 40px rgba(0,0,0,0.18);transform-style:preserve-3d;animation:float 5s ease-in-out infinite;}
+.logo-wrap img{width:84%;height:84%;object-fit:contain;border-radius:12px}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.title-block{flex:1;padding:6px 8px}
+.title{font-size:38px;color:var(--emerald-dark);text-shadow:2px 2px 0 #fff,5px 5px 0 rgba(0,0,0,0.06);margin:0;letter-spacing:1px;animation:gentleFloat 6s ease-in-out infinite;}
+@keyframes gentleFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.subtitle{margin-top:6px;color:#063b22;font-weight:700}
+.tagline{margin-top:8px;color:#04422b;opacity:0.95}
+
+/* Navigation small */
+.nav {display:flex;gap:10px;margin-top:12px}
+.nav a{background:linear-gradient(180deg,#bfffd8,#78ffb0);padding:8px 12px;border-radius:8px;border:3px solid #0a6a3f;font-weight:800;color:#02220f;box-shadow:0 6px 0 #05321f}
+
+/* Main card */
+.main-card{margin-top:18px;background:linear-gradient(180deg,rgba(255,255,255,0.95),rgba(255,255,255,0.9));padding:18px;border-radius:12px;display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start;box-shadow:0 16px 40px rgba(0,0,0,0.12)}
+.left{padding:6px}
+.section-title{font-size:18px;color:var(--emerald-dark);font-weight:900;margin-bottom:8px}
+.lead{font-size:14px;color:#123a21;line-height:1.5}
+
+/* IP box */
+.ip {display:inline-block;background:linear-gradient(180deg,#1b3f21,#17351a);color:#dfffe8;padding:12px 16px;border-radius:8px;border:3px solid #0f6a3f;font-weight:900;cursor:pointer;box-shadow:0 8px 0 #072a1a;transition:transform .18s}
+.ip:hover{transform:translateY(-6px)}
+
+/* Buttons row */
+.actions{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+.btn-emerald{background:linear-gradient(180deg,#9fffcf,#00d07a);padding:12px 18px;border-radius:10px;border:3px solid #0a6a3f;font-weight:900;color:#042217;box-shadow:0 8px 0 #05321f;transition:transform .18s}
+.btn-emerald:hover{transform:translateY(-6px) scale(1.02)}
+.btn-ghost{background:transparent;padding:10px 14px;border-radius:10px;border:2px solid rgba(5,85,45,0.2);font-weight:800;color:#073b22}
+
+/* right sidebar */
+.sidebar{padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.96),rgba(255,255,255,0.92));box-shadow:inset 0 6px 18px rgba(0,0,0,0.03)}
+.status{display:flex;align-items:center;gap:8px;font-weight:900;color:#063b22}
+.status .dot{width:12px;height:12px;border-radius:50%;background:#0f7b3e;box-shadow:0 0 8px #7df4b1}
+
+/* Enchants showcase */
+.enchants{margin-top:14px;padding:12px;border-radius:10px;background:linear-gradient(180deg,#fff,#f7fff7);box-shadow:0 8px 22px rgba(0,0,0,0.06)}
+.enchant-grid{display:flex;gap:12px;flex-wrap:wrap}
+.enchant{width:140px;padding:8px;border-radius:10px;background:linear-gradient(180deg,#fff,#f2fff4);text-align:center;box-shadow:0 8px 18px rgba(0,0,0,0.06);transition:transform .18s}
+.enchant img{width:84px;height:84px;object-fit:contain}
+.enchant:hover{transform:translateY(-8px)}
+
+/* founder */
+.founder{margin-top:18px;padding:14px;border-radius:12px;background:linear-gradient(180deg,#e8d6b4,#d1b67c);border:4px solid #7b491f;display:flex;gap:12px;align-items:center}
+.founder img{width:92px;height:92px;object-fit:cover;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.18)}
+.founder h3{margin:0;color:#4b2e12}
+
+/* pixel bottom grass */
+.pixel-grass{position:fixed;left:0;right:0;bottom:0;height:110px;z-index:1;background-image:url('grass_strip.png');background-repeat:repeat-x;background-size:auto 110px;pointer-events:none;filter:drop-shadow(0 -6px 6px rgba(0,0,0,0.15))}
+
+/* popup */
+.popup{position:fixed;right:18px;top:18px;background:#fff;padding:10px 14px;border-radius:8px;color:#04361f;font-weight:800;transform:translateY(-8px) scale(.98);opacity:0;transition:all .28s}
+.popup.show{opacity:1;transform:translateY(0) scale(1)}
+
+/* creative particles (tiny blocks) */
+.particles{position:fixed;left:0;top:120px;width:100%;height:calc(100% - 220px);pointer-events:none;z-index:0}
+.particles span{position:absolute;width:10px;height:10px;background:linear-gradient(180deg,#fff,#c7ffd8);opacity:.9;border-radius:2px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.12));animation:rise 6s linear infinite}
+@keyframes rise{0%{transform:translateY(0) scale(1);opacity:1}100%{transform:translateY(-460px) scale(.7);opacity:0}}
+/* small responsive */
+@media(max-width:900px){.main-card{grid-template-columns:1fr}.logo-wrap{width:140px;height:140px}.title{font-size:28px}}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+
+<div class="wrapper">
+  <!-- HERO -->
+  <div class="header" role="banner">
+    <div class="logo-wrap">
+      <img src="MLOGO.png" alt="FG NETWORK logo (MLOGO)">
+    </div>
+    <div class="title-block">
+      <div class="title">FG NETWORK</div>
+      <div class="subtitle">Private whitelist server • 200+ Custom Enchants</div>
+      <div class="tagline">Join a friendly community — custom gear, events & epic enchants</div>
+      <div class="nav" aria-hidden="false">
+        <a class="btn-emerald" href="https://docs.google.com/forms/d/182hcVZUia6V7UUaU__DLjP99WVw6XMhXlKQFYKLfoAI/edit#responses" target="_blank">Apply for Whitelist</a>
+        <a class="btn-ghost" href="https://discord.gg/cVk3FcEXVS" target="_blank">Join Discord</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <section class="main-card" role="main">
+    <div class="left">
+      <div class="section-title">Welcome to FG NETWORK</div>
+      <div class="lead">FG NETWORK is a close-knit, whitelist-only Minecraft server that focuses on custom gameplay and player creativity. We run <strong>200+</strong> custom enchants, unique progression systems, and regular community events. Apply now to join!</div>
+
+      <div style="margin-top:12px">
+        <div style="font-weight:900;margin-bottom:6px">Server IP</div>
+        <div class="ip" onclick="copyIP()">play.fgnetworks5.online : 19343</div>
+        <div style="margin-top:8px;font-size:13px;color:#123a21">Tap/click to copy IP</div>
+      </div>
+
+      <div class="section-title" style="margin-top:16px">Highlights</div>
+      <ul style="color:#123a21;line-height:1.6">
+        <li><strong>200+ Custom Enchants</strong> — rare tiers & combo mechanics</li>
+        <li><strong>Custom gear & classes</strong> — craft your playstyle</li>
+        <li><strong>Community events</strong> — weekly competitions & rewards</li>
+      </ul>
+
+      <div class="section-title" style="margin-top:16px">Custom Enchants Showcase</div>
+      <div class="enchants" aria-hidden="false">
+        <div class="enchant-grid" id="enchantsGrid">
+          <div class="enchant"><img src="enchants1.png" alt=""><div style="font-weight:900;margin-top:6px">200+ Enchants</div><div style="font-size:12px;color:#265a34">Unique combos & rare tiers</div></div>
+          <div class="enchant"><img src="enchants2.png" alt=""><div style="font-weight:900;margin-top:6px">Enchant Tiers</div><div style="font-size:12px;color:#265a34">Common → Mythic → Legendary</div></div>
+          <div class="enchant"><img src="enchants3.png" alt=""><div style="font-weight:900;margin-top:6px">Combo Systems</div><div style="font-size:12px;color:#265a34">Stack effects for OP builds</div></div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="sidebar" aria-label="server-info">
+      <div class="status"><span class="dot" id="statusDot"></span> <div style="font-weight:900">Server Status</div></div>
+      <div id="statusText" style="margin-top:8px;font-weight:800;color:#0b4a2a">Checking...</div>
+
+      <div style="margin-top:14px">
+        <div class="section-title">Quick Info</div>
+        <div style="font-size:14px;color:#163a1b;line-height:1.45">
+          <strong>Mode:</strong> Whitelist (private)<br>
+          <strong>Plugins:</strong> Custom Enchants, Economy, Crates<br>
+          <strong>Events:</strong> Weekly prizes & community builds
+        </div>
+      </div>
+
+      <div style="margin-top:14px">
+        <div class="section-title">Join Links</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px">
+          <a class="btn-emerald" href="https://docs.google.com/forms/d/182hcVZUia6V7UUaU__DLjP99WVw6XMhXlKQFYKLfoAI/edit#responses" target="_blank">Whitelist Form</a>
+          <a class="btn-ghost" href="https://discord.gg/cVk3FcEXVS" target="_blank">Discord Server</a>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Founder -->
+  <section style="max-width:1080px;margin:18px auto;padding:0 12px;">
+    <div class="founder">
+      <img src="FOUNDER.png" alt="Founder">
+      <div>
+        <h3>King Furiois</h3>
+        <div style="color:#432b13">Founder & Lead — Creator of the 200+ custom enchant system. Contact: <a href="mailto:admin@fg-network.example">admin@fg-network.example</a></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- pixel grass -->
+<div class="pixel-grass" aria-hidden="true"></div>
+
+<!-- small popup -->
+<div id="popup" class="popup" role="status" aria-live="polite">Server IP copied</div>
+
+<!-- creative particle blocks (generate dynamically) -->
+<div class="particles" id="particles" aria-hidden="true"></div>
+
+<script>
+/* copy IP + popup */
+function copyIP(){
+  const ip = 'play.fgnetworks5.online:19343';
+  navigator.clipboard.writeText(ip).then(()=>showPopup('Server IP copied!'), ()=>showPopup('Copy failed — select and copy'));
+}
+function showPopup(msg){
+  const el = document.getElementById('popup');
+  el.textContent = msg; el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),1600);
+}
+
+/* create simple floating pixels */
+(function makeParticles(){
+  const container = document.getElementById('particles');
+  const count = 18;
+  for(let i=0;i<count;i++){
+    const s = document.createElement('span');
+    s.style.left = Math.random()*100 + '%';
+    s.style.top = (20 + Math.random()*60) + '%';
+    s.style.width = (8+Math.random()*8)+'px';
+    s.style.height = s.style.width;
+    s.style.background = Math.random()>0.6 ? '#fff' : '#c7ffd8';
+    s.style.opacity = (0.6+Math.random()*0.6).toString();
+    s.style.animationDelay = (Math.random()*5)+'s';
+    container.appendChild(s);
+  }
+})();
+
+/* server status check (mcsrvstat) */
+(async function checkStatus(){
+  try{
+    const api = 'https://api.mcsrvstat.us/2/play.fgnetworks5.online';
+    const r = await fetch(api);
+    if(!r.ok) throw 0;
+    const j = await r.json();
+    const on = j.online;
+    document.getElementById('statusText').textContent = on ? 'Online — '+(j.players?.online??'?')+' players' : 'Offline';
+    document.getElementByI
